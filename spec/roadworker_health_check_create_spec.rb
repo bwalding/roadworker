@@ -9,7 +9,7 @@ hosted_zone "winebarrel.jp" do
   rrset "www.winebarrel.jp", "A" do
     set_identifier "Primary"
     failover "PRIMARY"
-    health_check "http://192.0.43.10:80/path", :host => 'example.com', :search_string => '123', :request_interval => 10, :failure_threshold => 5
+    health_check "http://192.0.43.10:80/path", :host => 'example.com', :search_string => '123', :request_interval => 10, :failure_threshold => 5, :measure_latency => true, :inverted => true
     ttl 456
     resource_records(
       "127.0.0.1",
@@ -20,7 +20,7 @@ hosted_zone "winebarrel.jp" do
   rrset "www.winebarrel.jp", "A" do
     set_identifier "Secondary"
     failover "SECONDARY"
-    health_check "http://192.0.43.10:80/path", :host => 'example.com', :search_string => '123', :request_interval => 10, :failure_threshold => 10
+    health_check "http://192.0.43.10:80/path", :host => 'example.com', :search_string => '123', :request_interval => 10, :failure_threshold => 10, :measure_latency => true, :inverted => true
     ttl 456
     resource_records(
       "127.0.0.3",
@@ -60,6 +60,8 @@ EOS
             :search_string => '123',
             :request_interval => 10,
             :failure_threshold => 5,
+            :measure_latency => true,
+            :inverted => true,
           ))
 
           a2 = rrsets['www.winebarrel.jp.', 'A', "Secondary"]
@@ -77,6 +79,8 @@ EOS
             :search_string => '123',
             :request_interval => 10,
             :failure_threshold => 10,
+            :measure_latency => true,
+            :inverted => true,
           ))
         }
       end
@@ -140,6 +144,8 @@ EOS
             :search_string => '123',
             :request_interval => 30,
             :failure_threshold => 3,
+            :measure_latency => false,
+            :inverted => false,
           ))
 
           a2 = rrsets['www.winebarrel.jp.', 'A', "Secondary"]
@@ -157,6 +163,8 @@ EOS
             :search_string => '123',
             :request_interval => 30,
             :failure_threshold => 3,
+            :measure_latency => false,
+            :inverted => false,
           ))
         }
       end
@@ -219,6 +227,8 @@ EOS
             :search_string => '123',
             :request_interval => 10,
             :failure_threshold => 5,
+            :measure_latency => false,
+            :inverted => false,
           ))
 
           a2 = rrsets['www.winebarrel.jp.', 'A', "Secondary"]
@@ -235,6 +245,8 @@ EOS
             :search_string => '123',
             :request_interval => 10,
             :failure_threshold => 10,
+            :measure_latency => false,
+            :inverted => false,
           ))
         }
       end

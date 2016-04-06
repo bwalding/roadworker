@@ -20,6 +20,8 @@ module Roadworker
         search_string     = config[:search_string]
         request_interval  = config[:request_interval]
         failure_threshold = config[:failure_threshold]
+        measure_latency   = config[:measure_latency]
+        inverted          = config[:inverted]
 
         ulr = nil
 
@@ -38,6 +40,8 @@ module Roadworker
           :search_string     => search_string,
           :request_interval  => request_interval,
           :failure_threshold => failure_threshold,
+          :measure_latency   => measure_latency,
+          :inverted          => inverted
         }
       end
 

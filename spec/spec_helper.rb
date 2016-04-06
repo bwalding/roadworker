@@ -24,9 +24,15 @@ require 'fileutils'
 require 'logger'
 require 'rubydns'
 
+=begin
+  export TEST_AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+  export TEST_AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+  export TEST_AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
+=end
 Aws.config.update({
   :access_key_id => (ENV['TEST_AWS_ACCESS_KEY_ID'] || 'scott'),
   :secret_access_key => (ENV['TEST_AWS_SECRET_ACCESS_KEY'] || 'tiger'),
+  :session_token => (ENV['TEST_AWS_SESSION_TOKEN'] || 'lion')
 })
 
 RSpec.configure do |config|

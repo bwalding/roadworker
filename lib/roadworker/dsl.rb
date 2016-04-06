@@ -143,6 +143,8 @@ module Roadworker
               :search_string     => :search_string,
               :request_interval  => :request_interval,
               :failure_threshold => :failure_threshold,
+              :measure_latency   => :measure_latency,
+              :inverted          => :inverted
             }.each do |option_key, config_key|
               config[config_key] = options[option_key] if options[option_key]
             end
@@ -153,6 +155,8 @@ module Roadworker
                 :search_string,
                 :request_interval,
                 :failure_threshold,
+                :measure_latency,
+                :inverted
               ][i]
 
               config[key] = value
@@ -165,6 +169,8 @@ module Roadworker
 
           config.request_interval  ||= 30
           config.failure_threshold ||= 3
+          config.measure_latency   ||= false
+          config.inverted          ||= false
 
           @result.health_check = config
         end
